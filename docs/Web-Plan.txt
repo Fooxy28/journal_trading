@@ -1,0 +1,118 @@
+Website Jurnal Trading Pribadi
+
+Frontend :  HTML + CSS + Javascript
+Backend PHP
+Database : MySQL/MariaDB
+
+Website Jurnal Trading
+Website ini berfungsi sebagai catatan Jurnal Trading (Saham, Forex, atau Crypto) yang dapat membantu trader untuk mencatat semua aktivitas trading mereka dan membantu analisis aktivitas trading mereka.
+
+untuk tampilannya akan mirip dengan Excel agar lebih simpel dan mudah untuk digunakan oleh semua orang, tetapi tetap clean, modern, dan user friendly dan usahakan agar tidak terlihat rumit, untuk akun trading bisa ditambah dan diganti ganti seperti akun Demo 1, akun Rill Kecil, akun Rill Besar, Akun Cent, dll....
+
+untuk kolom yang ada pada website adalah :
+Tanggal
+- Tanggal transaksi
+- Secara otomatis terisi, tetapi user dapat mengubah tanggal sesuai keinginannya
+Balance
+- Jumlah saldo
+- user dapat memasukan jumlah saldo yang digunakan untuk trading, yang dimana setiap balance ditambahkan atau dikurangi oleh user secara manual akan ada status deposito/withdraw
+Stok/Pair
+- Berfungsi sebagai kolom identitas instrumen yang digunakan oleh trader seperti XAUUSD, EURUSD, BTCUSD, ETHUSD...
+- Bisa diisi sendiri untuk pair, misalnya ingin menambahkan pair XAUUSD atau BTCUSD dan sebagainya, jadi datanya sesuai keinginan user, diisi saat memilih Stok/Pair
+- User memilih Stok/Pair dengan dropdown dan bisa search Stok/Pair yang sudah ditambahkan
+Trading Status
+- Status hasil trading (Profit/Loss)
+- Akan otomatis terpilih berdasarkan harga open posisi, close posisi, dan posisi status dengan logika jika posisi buy dan open posisi lebih kecil dari close posisi maka hasilnya profit dan juga sebalikanya
+Amount
+- Jumlah Loss/Profit dalam bentuk $
+- User secara manual mengisi jumlah disini agar mudah melakukan perhitungan ke Balance yang ada
+Lot
+- Lot berapa yang digunakan saat trading
+- User memasukan Lot secara manual
+Position Status
+- posisi yang dibuka apakah Buy/Sell
+- User memilih secara manual posisi yang dibuka saat trading
+Entry Price
+- Harga market saat entry
+- User memasukan harga secara manual
+Exit Price
+- Harga saat menutup entry yang ada
+- User memasukan harga secara manual
+TP/SL Status
+- menentukan manual atau hit (TP/SL)
+- user secara manual memilih apakah SL/TP ditutup dengan manual atau terkena hit
+- untuk apakah SL atau TP akan mengikuti strading status apakah Loss (SL) atau Profit (TP), jadi user hanya perlu memilih manual atau hit
+Net Profit/Loss %
+- Persentase profit/loss dengan balance yang ada
+- secara otomatis dihitung sesuai dengan Loss atau Profit dengan perbandingan Balance
+Strategy
+- Strategi yang digunakan untuk trading
+- User mengisi secara manual Strategi apa yang diguunakan saat trading
+Note
+- Catatan bebas
+- User mengisi secara manual catatan tentang trading yang dilakukan
+Analysis
+- Link ke chart hasil analisis yang digunakan trading
+- User mengisi secara manual link ke chart hasil analisis yang digunakan untuk trading
+
+Struktur Website:
+- Heading : dengan tulisan Master Jurnal Trading
+- Subheading : dengan segala slogan websitenya
+- Form Hasil trading : form yang berfungsi mengisi data data kolom yang perlu diisi untuk catatan hasil trading
+- List Hasil Trading : berisikan list data catatan hasil trading yang sudah ditambahkan dengan maksimal baris untuk di view adalah 50 bari per page view
+- Analisis Section : Bagian hasil analisis perjalanan trading yang berisikan Chart, Pie Chart, dan sebagainya
+- Footer : tidak ada yang spesial, hanya footer biasa
+
+Analisis Section
+Stats:
+- Total Trades (Jumlah trading)
+- Profit Count (Jumlah Profit)
+- Loss Count (Jumlah Loss)
+- Profit Ratio (Rasio Profit dengan Loss)
+- Balance (Jumlah Saldo)
+- Total Profit (Jumlah Profit dalam bentuk uang)
+- Total Loss (Jumlah Loss dalam bentuk uang)
+- Highest Balance (Jumlah Tertinggi Saldo)
+- Gain (Berapa % kenaikan atau penurunan saldo)
+- Deposits (Deposit yang dilakukan)
+- Total Deposits (Total semua deposito)
+- Withdrawals (Jumlah yang di Withdraw dalam sekali deposit)
+- Total Withdrawals (Total semua widraw yang dilakukan)
+Chart:
+- Pie Chart Profit/Loss Rasio
+- Column Chart Trade/Hari dengan informasi bar hijau untuk profit dan bas merah untuk loss (bertumpuk)
+- Bar Chart kesamping dengan informasi jumlah Strategy yang digunakan misal CRT 10, Breakout 15, Momentum 12, dll..., dengan informasi tambahan berapa % Profit yang didapatkan menggunakan strategy tersebut
+
+database:
+nama database : trading_journal_db
+tabel
+balance
+- id
+- balance_amount
+- last-update
+balance_logs
+- id
+- type (enum: 'deposit', 'withdraw', 'adjustment', 'trade')
+- amount
+- note // nullable
+- created_at
+pairs
+- id
+- pair_code
+- created_at
+trades
+- id
+- trade_date
+- created_at
+- pair_id (fk pairs.id)
+- position_type (enum: 'buy','sell')
+- entry_price
+- exite_price
+- trading_status (enum: 'profit','loss')
+- amoun
+- net_percent
+- lot
+- tp_sl_status (enum: 'hit','manual')
+- strategy //nullable
+- note //nullable
+- analysis_link //nullable
